@@ -1,4 +1,4 @@
 ![](http://staticgs.sandboxol.com/sandbox/avatar/1715616787306190.jpg)
 
 **Blocky Mods**
-> Blockman Go is a library that allows you to send many friend requests, get likes and much more.
+> The script is designed for sending many friend requests, getting likes and much more.
