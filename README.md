@@ -1,4 +1,4 @@
-![](https://drive.google.com/file/d/16Avyb7-lfhILadajlsFgawuj9sJASOOd/view?usp=drivesdk)
+![](http://staticgs.sandboxol.com/sandbox/avatar/1714945711313523.jpg)
 
 **Blocky Mods:**
 
