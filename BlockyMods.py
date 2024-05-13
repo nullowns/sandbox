@@ -14,7 +14,7 @@ commands = input("\ncommand: ")
 
 class bot_list:
         def bot(self):
-        	response = requests.get('https://raw.githubusercontent.com/xStee1zzBG/Bro9119/main/bot.txt')
+        	response = requests.get('https://raw.githubusercontent.com/nullowns/BlockyMods/main/bot.txt')
         	bot_lines = response.text.splitlines()
         	random_bot = random.choice(bot_lines).strip()
         	bot_id, bot_token = random_bot.split(':')
