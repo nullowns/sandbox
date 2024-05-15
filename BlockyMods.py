@@ -1,31 +1,39 @@
 import os
 import random
 import threading
-
 import requests
 
-print("""  ____  _            _            __  __           _     
- | __ )| | ___   ___| | ___   _  |  \/  | ___   __| |___ 
- |  _ \| |/ _ \ / __| |/ / | | | | |\/| |/ _ \ / _` / __|
- | |_) | | (_) | (__|   <| |_| | | |  | | (_) | (_| \__ \
- |____/|_|\___/ \___|_|\_\\__, | |_|  |_|\___/ \__,_|___/
-                          |___/                          """, "\n\033[95mby NULL TEAM\033[0m", "\n\nLIST:", "\n - \033[95mfamily_spam\033[0m")
-commands = input("\ncommand: ")
+commands = f"\n      - \033[91mfamily_spam\033[0m"
 
-class bot_list:
-        def bot(self):
-        	response = requests.get('https://raw.githubusercontent.com/nullowns/BlockyMods/main/bot.txt')
-        	bot_lines = response.text.splitlines()
-        	random_bot = random.choice(bot_lines).strip()
-        	bot_id, bot_token = random_bot.split(':')
-        	return bot_id, bot_token
+def banner():
+	print("""  _   _    _    ____ _  _______ ____  
+ | | | |  / \  / ___| |/ / ____|  _ \ 
+ | |_| | / _ \| |   | ' /|  _| | |_) |
+ |  _  |/ ___ \ |___| . \| |___|  _ < 
+ |_| |_/_/   \_\____|_|\_\_____|_| \_\
+                                      """, f"\n\033[91mＮＵＬＬ ＴＥＡＭ\033[0m\n\n     ʟɪsᴛ: {commands}")
+
+banner()
+t = int(input("\nthreads: "))
+os.system('clear')
+
+print("downloading bots...")
+bot = 'https://raw.githubusercontent.com/nullowns/BlockyMods/main/bot.txt'
+response = requests.get(bot)
+
+bot_list = response.text
+bot_lines = bot_list.split('\n')
+os.system('clear')
+
+banner()
+commands = input("\nᴄᴏᴍᴍᴀɴᴅ: ")
 
 def family_spam():
 	if commands.lower() == 'family_spam':
 		os.system('clear')
 		while True:
-			class_bot = bot_list()
-			bot_id, bot_token = class_bot.bot()
+			random_bot = random.choice(bot_lines)
+			bot_id, bot_token = random_bot.split(':')
 
 			API_1 = "http://modsgs.sandboxol.com/friend/api/v1/family/recruit"
 
@@ -33,9 +41,9 @@ def family_spam():
 
 			response = requests.delete(API_1, headers=headers_1)
 
-			memberType = random.choice([1, 2, 3, 4])
-			ownerType = random.choice([1, 2, 3, 4])
 			age = random.randint(9, 200)
+			memberType = random.randint(1, 4)
+			ownerType = random.randint(1, 4)
 
 			data_1 = {'age': age, 'memberType': memberType, 'ownerType': ownerType}
 
@@ -45,10 +53,10 @@ def family_spam():
 			print(response.text)
 
 threads = []
-for i in range(5):
-    thread = threading.Thread(target=family_spam)
-    threads.append(thread)
-    thread.start()
+for i in range(t):
+	thread = threading.Thread(target=family_spam)
+	threads.append(thread)
+	thread.start()
 
 for thread in threads:
 	thread.join()
