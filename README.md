@@ -1,4 +1,4 @@
-# Blocky Mods
+# 🥷 Blocky Mods
 
 [**Visit Telegram**](https://t.me/nullowns)<br>
 
