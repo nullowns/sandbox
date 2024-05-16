@@ -18,7 +18,7 @@ t = int(input("\nthreads: "))
 os.system('clear')
 
 print("downloading bots...")
-bot = 'https://raw.githubusercontent.com/nullowns/BlockyMods/main/bot.txt'
+bot = 'https://raw.githubusercontent.com/nullowns/blockymods/main/bot.txt'
 response = requests.get(bot)
 
 bot_list = response.text
