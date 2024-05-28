@@ -246,7 +246,7 @@ def fspam():
 
 			response = requests.delete(API_11, headers=headers_11)
 
-			age = random.randint(200)
+			age = random.randint(9, 200)
 			memberType = random.randint(1, 4)
 			ownerType = random.randint(1, 4)
 
