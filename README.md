@@ -4,7 +4,7 @@
 
 The script is designed for sending many friend requests, getting likes and much more.
 
-![](http://staticgs.sandboxol.com/sandbox/avatar/1715890812348673.jpg)
+![](https://i.imgur.com/wPbXQfu.png)
 
 ## Documentation
 
