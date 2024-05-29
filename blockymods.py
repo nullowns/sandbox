@@ -2,41 +2,49 @@ import os
 import platform
 import random
 import threading
+from datetime import datetime
 
 from colorama import init, Fore
 import requests
+import jwt
 
 init()
 
 def clear():
-	if platform.system() == "Windows":
-		os.system("cls")
-	else:
-		os.system("clear")
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 clear()
 
 RED = Fore.LIGHTRED_EX
+GREEN = Fore.LIGHTGREEN_EX
 RESET = Fore.RESET
 
-commands = f"\n      - {RED}bwlike{RESET}\n      - {RED}bwsub{RESET}\n      - {RED}like{RESET}\n\n      - {RED}chspam{RESET}\n      - {RED}clspam{RESET}\n      - {RED}frspam{RESET}\n      - {RED}ffspam{RESET}\n      - {RED}fspam{RESET}\n\n      - {RED}region{RESET}"
+version = "v𝟷.𝟷.𝟷"
 
-def banner():
-	print("""  _   _    _    ____ _  _______ ____  
- | | | |  / \  / ___| |/ / ____|  _ \ 
- | |_| | / _ \| |   | ' /|  _| | |_) |
- |  _  |/ ___ \ |___| . \| |___|  _ < 
- |_| |_/_/   \_\____|_|\_\_____|_| \_\
-                                      """, f"\n{RED}ＮＵＬＬ ＴＥＡＭ{RESET}\n-----------------\n{RED}v１.１.０{RESET}\n\n     ʟɪsᴛ: {commands}")
-
-print(f"{Fore.LIGHTGREEN_EX}downloading bots...{RESET}")
+commands = (
+    f"\n      - {RED}bwlike{RESET}\n"
+    f"      - {RED}bwsub{RESET}\n"
+    f"      - {RED}like{RESET}\n\n"
+    f"      - {RED}chspam{RESET}\n"
+    f"      - {RED}clspam{RESET}\n"
+    f"      - {RED}frspam{RESET}\n"
+    f"      - {RED}ffspam{RESET}\n"
+    f"      - {RED}fspam{RESET}\n\n"
+    f"      - {RED}token{RESET}\n"
+    f"      - {RED}details{RESET}\n"
+    f"      - {RED}birthday{RESET}"
+)
 
 bot = "https://raw.githubusercontent.com/nullowns/blockymods/main/bot.txt"
+
+print(f"{GREEN}bot checker...{RESET}")
 
 while True:
     try:
         response = requests.get(bot)
-        response.raise_for_status()
         bot_lines = response.text.split('\n')
         break
     except requests.exceptions.ConnectionError:
@@ -44,360 +52,573 @@ while True:
 
 clear()
 
-banner()
+print(f"""  _   _    _    ____ _  _______ ____  
+ | | | |  / \  / ___| |/ / ____|  _ \ 
+ | |_| | / _ \| |   | ' /|  _| | |_) |
+ |  _  |/ ___ \ |___| . \| |___|  _ < 
+ |_| |_/_/   \_\____|_|\_\_____|_| \_\
+                                      
+{RED}ＮＵＬＬ ＴＥＡＭ{RESET}
+----------------
+{RED}{version}{RESET}
+
+     ʟɪsᴛ: {commands}
+
+═══════════════════════════════════════
+{RED}Telegram: @nullowns
+----------------------------------------------
+GitHub: https://github.com/nullowns/blockymods{RESET}
+═══════════════════════════════════════""")
 
 def region(text):
-	items = text.split(',')
-	region_items = [item.strip().strip('"').strip("'") for item in items]
-	return region_items
+    return random.choice([part.strip() for part in text.split(',')])
 
 def bwlike():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_1 = f"http://gw.sandboxol.com/bedwar/api/v1/thumbs-up?beneficiaryId={bwlike_id}"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			headers_1 = {'Access-Token': bot_token, 'userId': bot_id}
+        try:
+            url = f"http://gw.sandboxol.com/bedwar/api/v1/thumbs-up?beneficiaryId={user_id}"
 
-			response = requests.post(API_1, headers=headers_1)
-			
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
-				
-		except requests.exceptions.ConnectionError:
-			pass
+            headers = {
+                'Access-Token': bot_token,
+                'userId': bot_id
+            }
+
+            response = requests.post(url, headers=headers)
+
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def bwsub():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_2 = f"http://gw.sandboxol.com/bedwar/api/v1/follow/add?targetId={bwsub_id}"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			headers_2 = {'Access-Token': bot_token, 'userId': bot_id}
+        try:
+            url = f"http://gw.sandboxol.com/bedwar/api/v1/follow/add?targetId={user_id}"
 
-			response = requests.get(API_2, headers=headers_2)
+            headers = {
+                'Access-Token': bot_token,
+                'userId': bot_id
+            }
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
-				
-		except requests.exceptions.ConnectionError:
-			pass
+            response = requests.get(url, headers=headers)
+
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def like():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_3 = "http://modsgs.sandboxol.com/friend/api/v1/friends"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			data_1 = {'friendId': like_id, 'msg': 'let\'s be friends!', 'type': 2}
+        try:
+            url_1 = "http://modsgs.sandboxol.com/friend/api/v1/friends"
 
-			headers_3 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+            headers_1 = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			response = requests.post(API_3, headers=headers_3, json=data_1)
+            data = {
+                'friendId': user_id,
+                'msg': ''
+            }
 
-			API_4 = "http://modsgs.sandboxol.com/friend/api/v1/friends/requests/approve-all"
+            response = requests.post(url_1, headers=headers_1, json=data)
 
-			headers_4 = {'userId': like_id, 'Access-Token': like_token, 'User-Agent': 'okhttp/3.12.1'}
+            url_2 = "http://modsgs.sandboxol.com/friend/api/v1/friends/requests/approve-all"
 
-			response = requests.post(API_4, headers=headers_4)
+            headers_2 = {
+                'userId': user_id,
+                'Access-Token': user_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			API_5 = f"http://modsgs.sandboxol.com/friend/api/v1/popularity?friendId={like_id}"
+            response = requests.post(url_2, headers=headers_2)
 
-			headers_5 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+            url_3 = f"http://modsgs.sandboxol.com/friend/api/v1/popularity?friendId={user_id}"
 
-			response = requests.post(API_5, headers=headers_5)
+            response = requests.post(url_3, headers=headers_1)
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
 
-			API_6 = f"http://modsgs.sandboxol.com/friend/api/v1/friends?friendId={like_id}"
+            url_4 = f"http://modsgs.sandboxol.com/friend/api/v1/friends?friendId={user_id}"
 
-			headers_6 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+            response = requests.delete(url_4, headers=headers_1)
 
-			response = requests.delete(API_6, headers=headers_6)
-
-		except requests.exceptions.ConnectionError:
-			pass
+        except requests.exceptions.ConnectionError:
+            pass
 
 def chspam():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_7 = f"http://modsgs.sandboxol.com/msg/api/v1/msg/group/chat/apply?groupId={chspam_id}&msg={chspam_details}"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			headers_7 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+        try:
+            url = f"http://modsgs.sandboxol.com/msg/api/v1/msg/group/chat/apply?groupId={group_id}&msg={group_msg}"
 
-			response = requests.post(API_7, headers=headers_7)
+            headers = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+            response = requests.post(url, headers=headers)
 
-		except requests.exceptions.ConnectionError:
-			pass
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def clspam():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_8 = "http://modsgs.sandboxol.com/clan/api/v1/clan/tribe/member"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			data_2 = {'clanId': clan_id, 'msg': details_clan}
-			
-			headers_8 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+        try:
+            url = "http://modsgs.sandboxol.com/clan/api/v1/clan/tribe/member"
 
-			response = requests.post(API_8, headers=headers_8, json=data_2)
+            headers = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+            data = {
+                'clanId': clan_id,
+                'msg': clan_msg
+            }
 
-		except requests.exceptions.ConnectionError:
-			pass
+            response = requests.post(url, headers=headers, json=data)
+
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def frspam():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_9 = "http://modsgs.sandboxol.com/friend/api/v1/friends"
-			
-			data_3 = {'friendId': frspam_id, 'msg': 'let\'s be friends!', 'type': 2}
-			
-			headers_9 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
-			
-			response = requests.post(API_9, headers=headers_9, json=data_3)
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+        try:
+            url = "http://modsgs.sandboxol.com/friend/api/v1/friends"
 
-		except requests.exceptions.ConnectionError:
-			pass
+            headers = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
+
+            data = {
+                'friendId': user_id,
+                'msg': ''
+            }
+
+            response = requests.post(url, headers=headers, json=data)
+
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def ffspam():
-	while True:
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_10 = "http://modsgs.sandboxol.com/friend/api/v1/family/apply"
+    while True:
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			data_4 = {'age': ffspam_age, 'msg': ffspam_details, 'ownerId': ffspam_id, 'sex': 0, 'type': 1}
+        try:
+            url = "http://modsgs.sandboxol.com/friend/api/v1/family/apply"
 
-			headers_10 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+            headers = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			response = requests.post(API_10, headers=headers_10, json=data_4)
+            data = {
+                'age': spam_age,
+                'msg': spam_msg,
+                'ownerId': user_id,
+                'sex': 0
+            }
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+            response = requests.post(url, headers=headers, json=data)
 
-		except requests.exceptions.ConnectionError:
-			pass
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
 
 def fspam():
-	while True:
-		random_region = random.choice(processed_region)
-		try:
-			random_bot = random.choice(bot_lines)
-			bot_id, bot_token = random_bot.split(':')
-		except ValueError:
-			continue
-		try:
-			API_11 = "http://modsgs.sandboxol.com/friend/api/v1/family/recruit"
+    while True:
+        random_region = region(region_set)
+        try:
+            random_bot = random.choice(bot_lines)
+            bot_id, bot_token = random_bot.split(':')
+        except ValueError:
+            continue
 
-			headers_11 = {'userId': bot_id, 'Access-Token': bot_token, 'User-Agent': 'okhttp/3.12.1'}
+        try:
+            url = "http://modsgs.sandboxol.com/friend/api/v1/family/recruit"
 
-			response = requests.delete(API_11, headers=headers_11)
+            headers_1 = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			age = random.randint(9, 200)
-			memberType = random.randint(1, 4)
-			ownerType = random.randint(1, 4)
+            response = requests.delete(url, headers=headers_1)
 
-			data_5 = {'age': age, 'memberType': memberType, 'ownerType': ownerType}
+            age = random.randint(0, 200)
+            member_type = random.randint(1, 4)
+            owner_type = random.randint(1, 4)
 
-			headers_12 = {'userId': bot_id, 'Access-Token': bot_token, 'appVersion': '4981', 'userLanguage': random_region, 'User-Agent': 'okhttp/3.12.1'}
+            headers_2 = {
+                'userId': bot_id,
+                'Access-Token': bot_token,
+                'appVersion': '4983',
+                'userLanguage': random_region,
+                'User-Agent': 'okhttp/3.12.1'
+            }
 
-			response = requests.post(API_11, headers=headers_12, json=data_5)
+            data = {
+                'age': age,
+                'memberType': member_type,
+                'ownerType': owner_type
+            }
 
-			if response.status_code == 200:
-				print(f"{Fore.LIGHTGREEN_EX}SUCCESS{RESET}")
-			else:
-				print(f"{RED}ERROR{RESET}")
+            response = requests.post(url, headers=headers_2, json=data)
 
-		except requests.exceptions.ConnectionError:
-			pass
+            if response.status_code == 200:
+                print(f"{GREEN}SUCCESS{RESET}")
+            else:
+                print(f"{RED}ERROR{RESET}")
+
+        except requests.exceptions.ConnectionError:
+            pass
+
+def token():
+    token_info = jwt.decode(user_token, options={"verify_signature": False})
+
+    user_id = token_info.get('jti')
+    created_set = token_info.get('iat')
+    expires_set = token_info.get('exp')
+
+    created = datetime.utcfromtimestamp(created_set).strftime('%Y-%m-%d %H:%M:%S')
+    expires = datetime.utcfromtimestamp(expires_set).strftime('%Y-%m-%d %H:%M:%S')
+
+    print(f""" • ID: {RED}{user_id}{RESET}
+ • Created: {RED}{created}{RESET}
+ • Expires: {RED}{expires}{RESET}\n\n""")
+
+    url = "http://modsgs.sandboxol.com/user/api/v2/user/details/info"
+
+    headers = {
+        'userId': user_id,
+        'Access-Token': user_token,
+        'User-Agent': 'okhttp/3.12.1'
+    }
+
+    response = requests.get(url, headers=headers)
+
+    response = response.json()
+
+    nickName = response['data']['nickName']
+    picUrl = response['data']['picUrl']
+    email = response['data']['email']
+    birthday = response['data']['birthday']
+    gDiamonds = response['data']['gDiamonds']
+    account = response['data']['account']
+    country = response['data']['country']
+    clientIp = response['data']['clientIp']
+    registerTime = response['data']['registerTime']
+    vipLv = response['data']['vipLv']
+    vipExp = response['data']['vipExp']
+    vipMaxExp = response['data']['vipMaxExp']
+    vipIcon = response['data']['vipIcon']
+    actualCountry = response['data']['actualCountry']
+
+    register = datetime.utcfromtimestamp(registerTime).strftime('%Y-%m-%d %H:%M:%S')
+
+    print(f""" • nickname: {RED}{nickName}{RESET}
+ • picUrl: {RED}{picUrl}{RESET}
+ • email: {RED}{email}{RESET}
+ • birthday: {RED}{birthday}{RESET}
+ • GCUBES: {RED}{gDiamonds}{RESET}
+ • username: {RED}{account}{RESET}
+ • country: {RED}{country}{RESET}
+ • IP: {RED}{clientIp}{RESET}
+ • register: {RED}{register}{RESET}
+ • vipLv: {RED}{vipLv}{RESET}
+ • vipExp: {RED}{vipExp}{RESET}
+ • vipMaxExp: {RED}{vipMaxExp}{RESET}
+ • vipIcon: {RED}{vipIcon}{RESET}
+ • actualCountry: {RED}{actualCountry}{RESET}""")
+
+def details():
+    try:
+        url = "http://modsgs.sandboxol.com/user/api/v1/user/info"
+
+        headers = {
+            'userId': user_id,
+            'Access-Token': user_token,
+            'User-Agent': 'okhttp/3.12.1'
+        }
+
+        data = {'details': details_set}
+
+        response = requests.put(url, headers=headers, json=data)
+
+        if response.status_code == 200:
+            print(f"{GREEN}SUCCESS{RESET}")
+        else:
+            print(f"{RED}ERROR{RESET}")
+
+    except requests.exceptions.ConnectionError:
+        pass
+
+def birthday():
+    try:
+        url = "http://modsgs.sandboxol.com/user/api/v1/user/info"
+
+        headers = {
+            'userId': user_id,
+            'Access-Token': user_token,
+            'User-Agent': 'okhttp/3.12.1'
+        }
+
+        data = {'birthday': birthday}
+
+        response = requests.put(url, headers=headers, json=data)
+
+        if response.status_code == 200:
+            print(f"{GREEN}SUCCESS{RESET}")
+        else:
+            print(f"{RED}ERROR{RESET}")
+
+    except requests.exceptions.ConnectionError:
+        pass
 
 while True:
-	commands = input("\nᴄᴏᴍᴍᴀɴᴅ: ").lower()
+    commands = input("\nᴄᴏᴍᴍᴀɴᴅ: ").lower()
 
-	if commands == 'bwlike':
-		clear()
-		bwlike_id = input("ID: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=bwlike)
-			threads.append(thread)
-			thread.start()
+    if commands == 'bwlike':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Speed >>> {RED}500{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=bwlike)
+            threads.append(thread)
+            thread.start()
 
-		for thread in threads:
-			thread.join()
-			
-	elif commands == 'bwsub':
-		clear()
-		bwsub_id = input("ID: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=bwsub)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'bwsub':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Speed >>> {RED}500{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=bwsub)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'like':
-		clear()
-		like_id = input("ID: ")
-		clear()
-		like_token = input("Access-Token: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=like)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'like':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Tutorial in Telegram {RED}@nullowns{RESET}\n")
+        user_token = input("Access-Token: ")
+        clear()
+        print(f"Speed >>> {RED}20{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=like)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'chspam':
-		clear()
-		chspam_id = input("CHAT ID: ")
-		clear()
-		chspam_details = input("details: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=chspam)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'chspam':
+        clear()
+        group_id = input("GROUP ID: ")
+        clear()
+        group_msg = input("SPAM MESSAGE: ")
+        clear()
+        print(f"Speed >>> {RED}5{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=chspam)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'clspam':
-		clear()
-		clan_id = input("CLAN ID: ")
-		clear()
-		details_clan = input("details: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=clspam)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'clspam':
+        clear()
+        clan_id = input("CLAN ID: ")
+        clear()
+        clan_msg = input("SPAM MESSAGE: ")
+        clear()
+        print(f"Speed >>> {RED}5{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=clspam)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'frspam':
-		clear()
-		frspam_id = input("ID: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=frspam)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'frspam':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Speed >>> {RED}5{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=frspam)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'ffspam':
-		clear()
-		ffspam_id = input("ID: ")
-		clear()
-		ffspam_age = input("(0-999999999) age: ")
-		clear()
-		ffspam_details = input("details: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=ffspam)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'ffspam':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        spam_age = input("(0-999999999) AGE: ")
+        clear()
+        spam_msg = input("SPAM MESSAGE: ")
+        clear()
+        print(f"Speed >>> {RED}20{RESET}")
+        t = int(input("\nthreads: "))
+        clear()
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=ffspam)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'fspam':
-		clear()
-		region_give = input("region: ")
-		clear()
-		t = int(input("threads: "))
-		clear()
-		processed_region = region(region_give)
-		threads = []
-		for i in range(t):
-			thread = threading.Thread(target=fspam)
-			threads.append(thread)
-			thread.start()
+        for thread in threads:
+            thread.join()
 
-		for thread in threads:
-			thread.join()
+    elif commands == 'fspam':
+        clear()
+        print("zh_CN 🇨🇳\nen_US 🇺🇸\nde_DE 🇩🇪\nes_ES 🇪🇸\nfr_FR 🇫🇷\nhi_IN 🇮🇳\nin_ID 🇮🇩\nit_IT 🇮🇹\nja_JP 🇯🇵\nko_KR 🇰🇷\npl_PL 🇵🇱\npt_PT 🇵🇹\nru_RU 🇷🇺\nth_TH 🇹🇭\ntr_TR 🇹🇷\nuk_UA 🇺🇦\nvi_VN 🇻🇳\n\nzh_CN, en_US, de_DE, es_ES, fr_FR, hi_IN, in_ID, it_IT, ja_JP, ko_KR, pl_PL, pt_PT, ru_RU, th_TH, tr_TR, uk_UA, vi_VN")
+        region_set = input("\n\nregion: ")
+        clear()
+        print(f"Speed >>> {RED}20{RESET}\n")
+        t = int(input("threads: "))
+        clear()
+        processed_region = region(region_set)
+        threads = []
+        for i in range(t):
+            thread = threading.Thread(target=fspam)
+            threads.append(thread)
+            thread.start()
 
-	elif commands == 'region':
-		clear()
-		print("zh_CN, en_US, de_DE, es_ES, fr_FR, hi_IN, in_ID, it_IT, ja_JP, ko_KR, pl_PL, pt_PT, ru_RU, th_TH, tr_TR, uk_UA, vi_VN", "\n\nzh_CN 🇨🇳\nen_US 🇺🇸\nde_DE 🇩🇪\nes_ES 🇪🇸\nfr_FR 🇫🇷\nhi_IN 🇮🇳\nin_ID 🇮🇩\nit_IT 🇮🇹\nja_JP 🇯🇵\nko_KR 🇰🇷\npl_PL 🇵🇱\npt_PT 🇵🇹\nru_RU 🇷🇺\nth_TH 🇹🇭\ntr_TR 🇹🇷\nuk_UA 🇺🇦\nvi_VN 🇻🇳")
+        for thread in threads:
+            thread.join()
+
+    elif commands == 'token':
+        clear()
+        print(f"Tutorial in Telegram {RED}@nullowns{RESET}\n")
+        user_token = input("Access-Token: ")
+        clear()
+        token()
+
+    elif commands == 'details':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Tutorial in Telegram {RED}@nullowns{RESET}\n")
+        user_token = input("Access-Token: ")
+        clear()
+        details_set = input("details: ")
+        clear()
+        details()
+
+    elif commands == 'birthday':
+        clear()
+        user_id = input("ID: ")
+        clear()
+        print(f"Tutorial in Telegram {RED}@nullowns{RESET}\n")
+        user_token = input("Access-Token: ")
+        clear()
+        details_set = input("details: ")
+        clear()
+        birthday()
