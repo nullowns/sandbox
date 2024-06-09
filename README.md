@@ -9,7 +9,7 @@ The script is available to everyone for editing and can be used for any purpose 
 
 ## 📚 INFO
 
-[**COMMANDS**]()<br>
+[**COMMANDS**](https://github.com/nullowns/sandbox/blob/main/COMMANDS.md)<br>
 [**ZIP FILES**](https://github.com/nullowns/sandbox/releases)<br>
 
 #### INSTALL
