@@ -33,7 +33,7 @@ print(f"{BRIGHT}{GREEN}bot checker...{RESET}{RESET_ALL}")
 
 while True:
     try:
-        response = requests.get('https://raw.githubusercontent.com/nullowns/blockymods/main/bot.txt')
+        response = requests.get('https://raw.githubusercontent.com/nullowns/sandbox/main/bot.txt')
         bots = response.text.split('\n')
         break
     except requests.exceptions.ConnectionError:
@@ -64,12 +64,12 @@ columns = shutil.get_terminal_size().columns
 line_1 = '-' * columns
 line_2 = '═' * columns
 
-start = f"""{Fore.BLUE}  _   _ _   _ _     _        _____        ___   _ ____  
- | \ | | | | | |   | |      / _ \ \      / / \ | / ___| 
- |  \| | | | | |   | |     | | | \ \ /\ / /|  \| \___ \ 
- | |\  | |_| | |___| |___  | |_| |\ V  V / | |\  |___) |
- |_| \_|\___/|_____|_____|  \___/  \_/\_/  |_| \_|____/ 
-                                                        {RESET}
+start = f"""{Fore.BLUE}  ____    _    _   _ ____  ____   _____  __
+ / ___|  / \  | \ | |  _ \| __ ) / _ \ \/ /
+ \___ \ / _ \ |  \| | | | |  _ \| | | \  / 
+  ___) / ___ \| |\  | |_| | |_) | |_| /  \ 
+ |____/_/   \_\_| \_|____/|____/ \___/_/\_\
+                                           {RESET}
 {BRIGHT}{line_1}
 {GREEN}{version}{RESET}
 
@@ -78,7 +78,7 @@ start = f"""{Fore.BLUE}  _   _ _   _ _     _        _____        ___   _ ____
 {line_2}
 {MAGENTA}Telegram: @nullowns{RESET}
 {line_1}
-{MAGENTA}GitHub: https://github.com/nullowns/blockymods{RESET}
+{MAGENTA}GitHub: https://github.com/nullowns/sandbox{RESET}
 {line_2}{RESET_ALL}\n"""
 
 def banner(text):
@@ -259,8 +259,6 @@ def chspam():
             if message == "SUCCESS":
                 print(f"{BRIGHT}{GREEN}SUCCESS{RESET}{RESET_ALL}")
 
-        time.sleep(5)
-
 def clspam():
     while True:
         try:
@@ -300,8 +298,6 @@ def clspam():
             if message == "SUCCESS":
                 print(f"{BRIGHT}{GREEN}SUCCESS{RESET}{RESET_ALL}")
 
-        time.sleep(5)
-
 def frspam():
     while True:
         try:
@@ -340,8 +336,6 @@ def frspam():
         elif logs == "2":
             if message == "SUCCESS":
                 print(f"{BRIGHT}{GREEN}SUCCESS{RESET}{RESET_ALL}")
-
-        time.sleep(5)
 
 def ffspam():
     while True:
@@ -383,8 +377,6 @@ def ffspam():
         elif logs == "2":
             if message == "success":
                 print(f"{BRIGHT}{GREEN}success{RESET}{RESET_ALL}")
-
-        time.sleep(5)
 
 def fspam():
     processed_region = region(region_set)
@@ -441,8 +433,6 @@ def fspam():
         elif logs == "2":
             if message == "success":
                 print(f"{BRIGHT}{GREEN}success{RESET}{RESET_ALL}")
-
-        time.sleep(5)
 
 def token():
     token_info = jwt.decode(user_token, options={"verify_signature": False})
@@ -586,8 +576,6 @@ def botdel():
         elif logs == "2":
             if message == "SUCCESS":
                 print(f"{BRIGHT}{GREEN}SUCCESS{RESET}{RESET_ALL}")
-
-        time.sleep(5)
 
 while True:
     command = ' '.join(input("\nᴄᴏᴍᴍᴀɴᴅ: ").lower().split())
