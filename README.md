@@ -1,25 +1,27 @@
-# 🥷 Blocky Mods
+# Blockman Go
 
-[**Visit Telegram**](https://t.me/nullowns)<br>
+[**YouTube**](https://youtube.com/@nullowns)<br>
+[**Telegram**](https://t.me/nullowns)<br>
 
-The script is designed for sending many friend requests, getting likes and much more.
+The script is available to everyone for editing and can be used for any purpose absolutely free, such as getting likes, spam and much more in Blockman Go.
 
-![](https://i.imgur.com/wPbXQfu.png)
+![](https://i.imgur.com/3Pnfuzb.jpeg)
 
-## Documentation
+## 📚 INFO
 
-NULL TEAM | [**Releases**](https://github.com/nullowns/blockymods/releases)<br>
+[**COMMANDS**]()<br>
+[**ZIP FILES**](https://github.com/nullowns/sandbox/releases)<br>
 
-#### Clone and Install Script
+#### INSTALL
 
 <pre>
-git clone https://github.com/nullowns/blockymods
-cd blockymods
-pip3 install -r requirements.txt
+git clone https://github.com/nullowns/sandbox
+cd sandbox
+pip install -r requirements.txt
 </pre>
 
-#### Launch
+#### LAUNCH
 
 <pre>
-python3 blockymods.py
+python sandbox.py
 </pre>
