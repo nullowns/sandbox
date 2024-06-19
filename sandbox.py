@@ -95,7 +95,7 @@ def bwlike():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -128,7 +128,7 @@ def bwsub():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -163,7 +163,7 @@ def like():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -172,6 +172,7 @@ def like():
         headers_1 = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -190,6 +191,7 @@ def like():
         headers_2 = {
             'userId': user_id,
             'Access-Token': user_token,
+            'userDeviceId': user_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -229,7 +231,7 @@ def chspam():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -238,6 +240,7 @@ def chspam():
         headers = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -263,7 +266,7 @@ def clspam():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -272,6 +275,7 @@ def clspam():
         headers = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -302,7 +306,7 @@ def frspam():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -311,6 +315,7 @@ def frspam():
         headers = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -341,7 +346,7 @@ def ffspam():
     while True:
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -350,6 +355,7 @@ def ffspam():
         headers = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -384,7 +390,7 @@ def fspam():
         random_region = region(region_set)
         try:
             bot = random.choice(bots)
-            bot_id, bot_token = bot.split(':')
+            bot_id, bot_token, bot_device = bot.split(':')
         except ValueError:
             continue
 
@@ -393,6 +399,7 @@ def fspam():
         headers_1 = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -403,6 +410,7 @@ def fspam():
             'Access-Token': bot_token,
             'appVersion': '4991',
             'userLanguage': random_region,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -453,6 +461,7 @@ def token():
     headers = {
         'userId': user_id,
         'Access-Token': user_token,
+        'userDeviceId': user_device,
         'User-Agent': 'okhttp/3.12.1'
     }
 
@@ -501,6 +510,7 @@ def details():
     headers = {
         'userId': user_id,
         'Access-Token': user_token,
+        'userDeviceId': user_device,
         'User-Agent': 'okhttp/3.12.1'
     }
 
@@ -528,10 +538,13 @@ def birthday():
     headers = {
         'userId': user_id,
         'Access-Token': user_token,
+        'userDeviceId': user_device,
         'User-Agent': 'okhttp/3.12.1'
     }
 
-    data = {'birthday': birthday_set}
+    data = {
+        'birthday': birthday_set
+    }
 
     try:
         response = requests.put(url, headers=headers, json=data)
@@ -549,13 +562,14 @@ def birthday():
 def botdel():
     while True:
         bot = random.choice(bots)
-        bot_id, bot_token = bot.split(':')
+        bot_id, bot_token, bot_device = bot.split(':')
 
         url = f"http://modsgs.sandboxol.com/friend/api/v1/friends?friendId={user_id}"
 
         headers = {
             'userId': bot_id,
             'Access-Token': bot_token,
+            'userDeviceId': bot_device,
             'User-Agent': 'okhttp/3.12.1'
         }
 
@@ -617,6 +631,8 @@ while True:
     elif command == "like":
         clear()
         user_token = ' '.join(input("Access-Token: ").split())
+        clear()
+        user_device = ' '.join(input("DEVICE: ").split())
         clear()
         logs = ' '.join(input("logs: ").split())
         clear()
@@ -712,7 +728,9 @@ while True:
 
     elif command == "token":
         clear()
-        user_token = input("Access-Token: ")
+        user_token = ' '.join(input("Access-Token: ").split())
+        clear()
+        user_device = ' '.join(input("DEVICE: ").split())
         clear()
         token()
 
@@ -722,13 +740,17 @@ while True:
         clear()
         details_set = ' '.join(input("details: ").split())
         clear()
+        user_device = ' '.join(input("DEVICE: ").split())
+        clear()
         details()
 
     elif command == "birthday":
         clear()
         user_token = ' '.join(input("Access-Token: ").split())
         clear()
-        birthday_set = input("birthday: ")
+        birthday_set = ' '.join(input("birthday: ").split())
+        clear()
+        user_device = ' '.join(input("DEVICE: ").split())
         clear()
         birthday()
 
